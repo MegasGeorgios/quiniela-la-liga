@@ -28,29 +28,29 @@
         <form>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
-              <label for="inputEmail">Email address</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+              <label for="email">Email address</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-              <label for="inputPassword">Password</label>
+              <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required="required">
+              <label for="pass">Password</label>
             </div>
           </div>
           <div class="form-group">
             <div class="checkbox">
               <label>
                 <input type="checkbox" value="remember-me">
-                Remember Password
+                Recordar contraseña
               </label>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="index.html">Login</a>
+          <a class="btn btn-primary btn-block" href="index.php">Iniciar sesión</a>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <a class="d-block small mt-3" href="register.php">Registrarse</a>
+          <a class="d-block small" href="forgot-password.php">Has olvidado tu contraseña?</a>
         </div>
       </div>
     </div>
