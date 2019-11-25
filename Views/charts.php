@@ -37,8 +37,5 @@
           </div>
         </div>
 
-        <p class="small text-center text-muted my-5">
-          <em>More chart examples coming soon...</em>
-        </p>
 
 <?php include_once('main_layout/main_end.php'); ?>
