@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS qn_user (
     pass VARCHAR(100) NOT NULL,
     created DATETIME NOT NULL,
     rol_id INT NOT NULL,
-    FOREIGN KEY (rol_id) REFERENCES qn_rol (id)
+    FOREIGN KEY (rol_id) REFERENCES qn_rol (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS qn_team ( 
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS qn_standing (
     id INT PRIMARY KEY AUTO_INCREMENT,
     team_id INT NOT NULL,
     points INT DEFAULT 0,
-    FOREIGN KEY (team_id) REFERENCES qn_team (id)
+    FOREIGN KEY (team_id) REFERENCES qn_team (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS qn_match ( 
@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS qn_match (
     id_team_visit INT NOT NULL,
     fixture INT NOT NULL,
     match_date DATETIME NOT NULL,
-    FOREIGN KEY (id_team_home) REFERENCES qn_team (id),
-    FOREIGN KEY (id_team_visit) REFERENCES qn_team (id)
+    FOREIGN KEY (id_team_home) REFERENCES qn_team (id) ON DELETE CASCADE,
+    FOREIGN KEY (id_team_visit) REFERENCES qn_team (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS qn_result (
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS qn_result (
     score_home INT NOT NULL,
     score_visit INT NOT NULL,
     match_id INT NOT NULL,
-    FOREIGN KEY (match_id) REFERENCES qn_match (id)
+    FOREIGN KEY (match_id) REFERENCES qn_match (id) ON DELETE CASCADE
 );
 
 
@@ -54,15 +54,15 @@ CREATE TABLE IF NOT EXISTS qn_football_pool (
     score_visit INT NOT NULL,
     user_id INT NOT NULL,
     match_id INT NOT NULL,
-    FOREIGN KEY (match_id) REFERENCES qn_match (id),
-    FOREIGN KEY (user_id) REFERENCES qn_user (id)    
+    FOREIGN KEY (match_id) REFERENCES qn_match (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES qn_user (id) ON DELETE CASCADE   
 );
 
 CREATE TABLE IF NOT EXISTS qn_scorer (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     points INT NOT NULL,
     user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES qn_user (id)
+    FOREIGN KEY (user_id) REFERENCES qn_user (id) ON DELETE CASCADE
 );
 
 /*CREATE TABLE IF NOT EXISTS award (
