@@ -5,7 +5,7 @@
       Todos los resultados
       <div class="form-group" style="padding-left: 10px;">
         <select id="fixture" name="fixture" class="form-control">
-          <option value="0">Seleccionar Jornada</option>
+          <option value="0">Todas las jornadas</option>
           <?php for($i=1; $i < 39; $i++) { ?>
             <option value="<?= $i ?>">Jornada <?= $i ?></option>.
           <?php } ?>
@@ -13,7 +13,7 @@
       </div>
       <div class="form-group" style="padding-left: 10px; padding-right: 10px;">
         <select id="team" name="team" class="form-control">
-          <option value="0">Seleccionar equipo</option>
+          <option value="0">Todos los equipos</option>
           <?php for($i=1; $i < 21; $i++) { ?>
             <option value="<?= $i ?>">Equipo <?= $i ?></option>.
           <?php } ?>
