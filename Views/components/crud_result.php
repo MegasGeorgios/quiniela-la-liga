@@ -1,6 +1,6 @@
 <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <?php if($_GET['view'] == 'add_result'){ $header="Añadir resultados"; }else{$header="Actualizar resultado";} ?>
+      <?php if($_GET['view'] == 'add_result'){ $header="Añadir resultados"; }else{$header="Editar resultado";} ?>
       <div class="card-header"><?= $header ?></div>
       <div class="card-body">
       <?php if ($_GET['view'] == 'add_result') { ?>

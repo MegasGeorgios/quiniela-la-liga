@@ -5,6 +5,16 @@
 		$title= $_GET['view'] == 'add_user' ? 'Admin - Añadir Usuario' : 'Admin - Editar Usuario';
 		$include = 'components/crud_user.php';
 
+	}elseif (isset($_GET['view']) && $_GET['view'] == 'roles')
+	{
+		$title= 'Admin - Roles';
+		$include = 'components/crud_roles.php';
+
+	}elseif (isset($_GET['view']) && $_GET['view'] == 'awards')
+	{
+		$title= 'Admin - Premios';
+		$include = 'components/crud_awards.php';
+
 	}elseif (isset($_GET['view']) && ($_GET['view'] == 'add_result' || $_GET['view'] == 'edit_result'))
 	{
 		$title = $_GET['view'] == 'add_result' ? 'Admin - Añadir Resultados' : 'Admin - Editar Resultado';
@@ -45,8 +55,13 @@
 		$title = 'Admin - Todos los resultados';
 		$include = 'components/all_results.php';
 
+	}elseif (isset($_GET['view']) && $_GET['view'] == 'charts')
+	{
+		$title = 'Admin - Estadisticas';
+		$include = 'components/charts.php';
+
 	}else{
-		$title = 'Admin - ';
+		$title = 'Admin - No encontrada';
 		$include = '404.php';
 		//echo "<h1>Blank Page</h1> <hr> <p>This is a great starting point for new custom pages.</p>";
 	}
