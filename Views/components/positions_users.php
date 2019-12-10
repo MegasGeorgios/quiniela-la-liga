@@ -37,5 +37,10 @@
         </tbody>
       </table>
     </div>
+    <div class="card-footer small text-muted">
+      <form action="#update">
+        <input type="submit" class="btn btn-primary" value="Actualizar tabla"> Updated yesterday at 11:59 PM
+      </form>
+    </div>
   </div>
 </div>

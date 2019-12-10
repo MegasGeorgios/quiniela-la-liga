@@ -25,6 +25,11 @@
 		$title = $_GET['view'] == 'add_team' ? 'Admin - Añadir Equipo' : 'Admin - Editar Equipo';
 		$include = 'components/crud_team.php';
 
+	}elseif (isset($_GET['view']) && ($_GET['view'] == 'add_player' || $_GET['view'] == 'edit_player'))
+	{
+		$title = $_GET['view'] == 'add_player' ? 'Admin - Añadir Jugador' : 'Admin - Editar Jugador';
+		$include = 'components/crud_player.php';
+
 	}elseif (isset($_GET['view']) && $_GET['view'] == 'add_match')
 	{
 		$title = 'Admin - Añadir Partido';
@@ -54,6 +59,11 @@
 	{
 		$title = 'Admin - Todos los resultados';
 		$include = 'components/all_results.php';
+
+	}elseif (isset($_GET['view']) && ($_GET['view'] == 'all_players-goals' || $_GET['view'] == 'all_players-asists'))
+	{
+		$title = 'Admin - Top Jugadores';
+		$include = 'components/positions_players.php';
 
 	}elseif (isset($_GET['view']) && $_GET['view'] == 'charts')
 	{

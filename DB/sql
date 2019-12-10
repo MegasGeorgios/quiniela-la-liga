@@ -22,18 +22,23 @@ CREATE TABLE IF NOT EXISTS qn_team (
     slug VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS qn_standing_updated (
+CREATE TABLE IF NOT EXISTS qn_player (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    standing_updated DATETIME NOT NULL
+    name VARCHAR(100) NOT NULL,
+    dorsal INT NOT NULL,
+    goals INT NOT NULL,
+    asists INT NOT NULL,
+    team_id INT NOT NULL,
+    FOREIGN KEY (team_id) REFERENCES qn_team (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS qn_standing (
     id INT PRIMARY KEY AUTO_INCREMENT,
     team_id INT NOT NULL,
     points INT DEFAULT 0,
-    standing_updated INT NOT NULL,
-    FOREIGN KEY (team_id) REFERENCES qn_team (id) ON DELETE CASCADE,
-    FOREIGN KEY (standing_updated) REFERENCES qn_standing_updated (id) ON DELETE CASCADE
+    gf INT DEFAULT 0,
+    gc INT DEFAULT 0,
+    FOREIGN KEY (team_id) REFERENCES qn_team (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS qn_match ( 
