@@ -3,7 +3,18 @@
 	if (isset($_GET['view']) && ($_GET['view'] == 'add_user' || $_GET['view'] == 'edit_user'))
 	{
 		$title= $_GET['view'] == 'add_user' ? 'Admin - Añadir Usuario' : 'Admin - Editar Usuario';
-		$include = 'components/crud_user.php';
+		$include = '../Controllers/UserController.php';
+		$controller = 'UserController';
+		$method = 'crudUser';
+	    
+
+	}elseif (isset($_GET['view']) && $_GET['view'] == 'store_user')
+	{
+		$title= $_GET['view'] == 'add_user' ? 'Admin - Añadir Usuario' : 'Admin - Editar Usuario';
+		$include = '../Controllers/UserController.php';
+		$controller = 'UserController';
+		$method = 'storeUser';
+	    
 
 	}elseif (isset($_GET['view']) && $_GET['view'] == 'roles')
 	{
@@ -48,7 +59,9 @@
 	}elseif (isset($_GET['view']) && $_GET['view'] == 'all_users')
 	{
 		$title = 'Admin - Todos los usuarios';
-		$include = 'components/all_users.php';
+		$include = '../Controllers/UserController.php';
+		$controller = 'UserController';
+		$method = 'allUsers';
 
 	}elseif (isset($_GET['view']) && $_GET['view'] == 'all_teams')
 	{
@@ -78,5 +91,7 @@
 include_once('main_layout/main_ini.php');
 
 include_once($include);
+$controller = new $controller;
+call_user_func( array( $controller, $method ) );
 
 include_once('main_layout/main_end.php'); ?>
