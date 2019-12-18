@@ -27,6 +27,7 @@ class User extends ConnectDB
         return $users;
     }
 
+    // Obtener usuario por id
     public function getUserById($id)
     {        
         $result = $this->conn->query("SELECT * FROM qn_user INNER JOIN qn_rol ON qn_user.rol_id=qn_rol.id WHERE qn_user.id=$id") or die($this->conn->error);
@@ -37,11 +38,24 @@ class User extends ConnectDB
     }
 
     // Almacenar un usuario en bd
-    public function storeUser($name, $lastName, $dni, $phone, $email, $pass, $rol_id)
+    public function storeUser($name, $lastName, $dni, $phone, $email, $pass, $created, $rol_id)
     {        
-        $result = $this->conn->query("INSERT INTO qn_user (name, lastName, dni, phone, email, pass, rol_id) VALUES ('$name', '$lastName', '$dni', '$phone', '$email', '$pass', $rol_id)") or die($this->conn->error);
+        $this->conn->query("INSERT INTO qn_user (name, lastName, dni, phone, email, pass, created, rol_id) VALUES ('$name', '$lastName', '$dni', '$phone', '$email', '$pass', '$created', $rol_id)") or die($this->conn->error);
 
-        return $conn->insert_id;        
+        return $this->conn->insert_id;        
+    }
+
+    // Borrar usuario por id
+    public function deleteUser($id)
+    {        
+        $this->conn->query("DELETE FROM qn_user WHERE id=$id");
+
+        if (!$this->conn->error) 
+        {
+            return ["error" => false, "msg" => "Usuario eliminado!"];   
+        }else{
+            return ["error" => true, "msg" => $this->conn->error];
+        }
     }
 }
 

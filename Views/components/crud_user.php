@@ -68,11 +68,10 @@
             <select id="rol_id" name="rol_id" class="form-control">
               <?php if (isset($user['rol'])) { ?>
                 <option value="<?= $user['rol_id']; ?>" selected><?= $user['rol']; ?></option>
-              <?php }else{ ?>
-                <?php foreach ($roles as $rol) { ?>
-                  <option value="<?= $rol['id']; ?>" selected><?= $rol['rol']; ?></option>
-                <?php } ?>
               <?php } ?>
+                <?php foreach ($roles as $rol) { ?>
+                  <option value="<?= $rol['id']; ?>"><?= $rol['rol']; ?></option>
+                <?php } ?>
             </select>
           </div>
         </div>
@@ -84,7 +83,7 @@
         <?php }elseif ($_GET['view'] == 'edit_user') { ?>
           <div>
             <input type="submit" class="btn btn-primary" value="Actualizar">
-            <a href="#delete" class="btn btn-primary">Eliminar</a>
+            <a href="page_admin.php?view=delete_user&user_id=<?= $_GET['user_id']; ?>" class="btn btn-primary">Eliminar</a>
           </div>
         <?php } ?>
         

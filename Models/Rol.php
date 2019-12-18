@@ -30,7 +30,27 @@ class Rol extends ConnectDB
     // Almacenar un rol en bd
     public function storeRol($rol)
     {        
-        $result = $this->conn->query("INSERT INTO qn_rol (rol) VALUES ('$rol')") or die($this->conn->error);       
+        $this->conn->query("INSERT INTO qn_rol (rol) VALUES ('$rol')");
+
+        if (!$this->conn->error) 
+        {
+            return ["error" => false, "msg" => "Rol añadido!"];   
+        }else{
+            return ["error" => true, "msg" => $this->conn->error];
+        }       
+    }
+
+    // Borrar usuario por id
+    public function deleteRol($id)
+    {        
+        $this->conn->query("DELETE FROM qn_rol WHERE id=$id");
+
+        if (!$this->conn->error) 
+        {
+            return ["error" => false, "msg" => "Rol eliminado!"];   
+        }else{
+            return ["error" => true, "msg" => $this->conn->error];
+        }
     }
 }
 

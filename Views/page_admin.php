@@ -1,25 +1,37 @@
 <?php
 
-	if (isset($_GET['view']) && ($_GET['view'] == 'add_user' || $_GET['view'] == 'edit_user'))
+	if (isset($_GET['view']) && ($_GET['view'] == 'add_user' || $_GET['view'] == 'edit_user' || $_GET['view'] == 'store_user' || $_GET['view'] == 'delete_user'))
 	{
 		$title= $_GET['view'] == 'add_user' ? 'Admin - Añadir Usuario' : 'Admin - Editar Usuario';
 		$include = '../Controllers/UserController.php';
 		$controller = 'UserController';
-		$method = 'crudUser';
-	    
 
-	}elseif (isset($_GET['view']) && $_GET['view'] == 'store_user')
-	{
-		$title= $_GET['view'] == 'add_user' ? 'Admin - Añadir Usuario' : 'Admin - Editar Usuario';
-		$include = '../Controllers/UserController.php';
-		$controller = 'UserController';
-		$method = 'storeUser';
+		if ($_GET['view'] == 'add_user' || $_GET['view'] == 'edit_user') {
+			$method = 'crudUser';
+		}elseif ($_GET['view'] == 'store_user') {
+			$method = 'storeUser';
+			// call_user_func desde aqui para poder hacer el header location en el controlador
+			include_once($include);
+			$controller = new $controller;
+			call_user_func( array( $controller, $method ) );
+		}elseif ($_GET['view'] == 'delete_user') {
+			$method = 'deleteUser';
+		}
 	    
-
-	}elseif (isset($_GET['view']) && $_GET['view'] == 'roles')
+	}elseif (isset($_GET['view']) && ($_GET['view'] == 'roles' || $_GET['view'] == 'store_rol' || $_GET['view'] == 'delete_rol'))
 	{
 		$title= 'Admin - Roles';
-		$include = 'components/crud_roles.php';
+		$include = '../Controllers/RolController.php';
+		$controller = 'RolController';
+
+		if ($_GET['view'] == 'roles') {
+			$method = 'crudRol';
+		}elseif ($_GET['view'] == 'store_rol') {
+			$method = 'storeRol';
+		}elseif ($_GET['view'] == 'delete_rol') {
+			$method = 'deleteRol';
+		}
+		
 
 	}elseif (isset($_GET['view']) && $_GET['view'] == 'awards')
 	{

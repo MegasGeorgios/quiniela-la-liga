@@ -36,4 +36,4 @@
       <div class="container-fluid">
 
         <!-- Breadcrumbs-->
-        <?php include_once('layout/breadcrumb.html'); ?>
+        <?php //include_once('layout/breadcrumb.html'); ?>
