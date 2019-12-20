@@ -18,11 +18,13 @@
           </tr>
         </tfoot>
         <tbody>
-          <?php for ($i=0; $i < 20; $i++) { ?>
+          <?php if (isset($teams)) { ?>
+          <?php foreach($teams as $team) { ?>
             <tr>
-              <td><a href="page_admin.php?view=edit_team&team_id=<?= $i; ?>">Equipo<?= $i; ?></a></td>
-              <td><a href="page_admin.php?view=edit_team&team_id=<?= $i; ?>">EQP<?= $i; ?></a></td>
+              <td><a href="page_admin.php?view=edit_team&team_id=<?= $team['id'];?>"><?= $team['name']; ?></a></td>
+              <td><a href="page_admin.php?view=edit_team&team_id=<?= $team['id'];?>"><?= $team['slug']; ?></a></td>
             </tr>
+          <?php } ?>
           <?php } ?>
         </tbody>
       </table>

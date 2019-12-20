@@ -28,7 +28,7 @@ class RolController extends BaseController
 	{
 		if (isset($_POST)) 
 		{
-			$name = filter_var($_POST['rol'], FILTER_SANITIZE_STRING);
+			$name = trim(filter_var($_POST['rol'], FILTER_SANITIZE_STRING));
 
 			$rol = new Rol();
 			$response = $rol->storeRol($name);
@@ -49,10 +49,36 @@ class RolController extends BaseController
 			$response = $rol->deleteRol($id);
 
 			BaseController::msgValidate($response);
+		}else
+		{
+			BaseController::msgDanger('Ha ocurrido un error al intentar eliminar el rol!');
+			die();
 		}
 
 		$this->crudRol();
 	}
+
+	// Actualizar rol
+	public function updateRol()
+    {
+    	if (isset($_POST)) 
+    	{
+    		//obtener datos del formulario
+    		$rol = trim(filter_var($_POST['rol'], FILTER_SANITIZE_STRING));
+			$rol_id = filter_var($_POST['rol_id'], FILTER_VALIDATE_INT);
+
+			$rolModel = new Rol();
+			$response = $rolModel->updateRol($rol, $rol_id);
+			
+			BaseController::msgValidate($response);
+		}else
+		{
+			BaseController::msgDanger('Ha ocurrido un error al intentar actualizar el rol!');
+			die();
+		}
+
+		$this->crudRol();
+    }
 
 }
 

@@ -8,6 +8,7 @@
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Apellido(s)</th>
             <th>DNI</th>
             <th>Email</th>
             <th>Registrado</th>
@@ -16,19 +17,23 @@
         <tfoot>
           <tr>
             <th>Nombre</th>
+            <th>Apellido(s)</th>
             <th>DNI</th>
             <th>Email</th>
             <th>Registrado</th>
           </tr>
         </tfoot>
         <tbody>
+          <?php if (isset($users)) { ?>
           <?php foreach($users as $user) { ?>
             <tr>
               <td><a href="page_admin.php?view=edit_user&user_id=<?= $user['id']; ?>"><?= $user['name'] ?></a></td>
+              <td><a href="page_admin.php?view=edit_user&user_id=<?= $user['id']; ?>"><?= $user['lastname'] ?></a></td>
               <td><a href="page_admin.php?view=edit_user&user_id=<?= $user['id']; ?>"><?= $user['dni'] ?></a></td>
               <td><a href="page_admin.php?view=edit_user&user_id=<?= $user['id']; ?>"><?= $user['email'] ?></a></td>
               <td><a href="page_admin.php?view=edit_user&user_id=<?= $user['id']; ?>"><?= $user['created'] ?></a></td>
             </tr>
+          <?php } ?>
           <?php } ?>
         </tbody>
       </table>

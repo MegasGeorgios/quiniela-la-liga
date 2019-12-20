@@ -52,6 +52,19 @@ class Rol extends ConnectDB
             return ["error" => true, "msg" => $this->conn->error];
         }
     }
+
+    // Actualizar rol 
+    public function updateRol($rol, $id)
+    {   
+        $this->conn->query("UPDATE qn_rol SET rol='$rol' WHERE id=$id");
+                
+        if (!$this->conn->error) 
+        {
+            return ["error" => false, "msg" => "Rol actualizado!"];   
+        }else{
+            return ["error" => true, "msg" => $this->conn->error];
+        }
+    }
 }
 
 

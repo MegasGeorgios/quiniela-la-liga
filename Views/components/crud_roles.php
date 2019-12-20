@@ -7,7 +7,7 @@
             <div class="form-row">
               <div class="col-md-10">
                 <div class="form-group">
-                  <input type="text" id="rol" name="rol" class="form-control" placeholder="Rol" required="required" autofocus="autofocus">
+                  <input type="text" id="rol" name="rol" class="form-control" placeholder="Rol" required="required" autofocus="autofocus" autocomplete="off">
                 </div>
               </div>
               <div class="col-md-2">
@@ -22,26 +22,27 @@
         Todos los roles:
         <hr>
 
-        <?php if (isset($roles)) { ?>
-        <form action="#update">
+        <?php if (isset($roles) && !empty($roles)) { ?>
         <?php foreach ($roles as $rol) { ?>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-8">
-                <div class="form-group">
-                  <input type="text" id="rol-<?= $rol['id']; ?>" name="rol" class="form-control" placeholder="Rol" required="required" value="<?= $rol['rol']; ?>">
+          <form action="page_admin.php?view=update_rol" method="POST">
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <input type="text" id="rol-<?= $rol['id']; ?>" name="rol" class="form-control" placeholder="Rol" autocomplete="off" required="required" value="<?= $rol['rol']; ?>">
+                    <input type="hidden" name="rol_id" value="<?= $rol['id']; ?>">
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <input type="submit" class="btn btn-primary" value="Actualizar">
-                  <a href="page_admin.php?view=delete_rol&rol_id=<?= $rol['id']; ?>" class=" btn btn-primary">Eliminar</a>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Actualizar">
+                    <a href="page_admin.php?view=delete_rol&rol_id=<?= $rol['id']; ?>" class=" btn btn-primary">Eliminar</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         <?php } ?>
-        </form>
         <?php }else{ ?>
           <p>No hay roles almacenados en base de datos!</p>
         <?php } ?>

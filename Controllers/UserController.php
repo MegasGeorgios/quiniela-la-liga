@@ -12,11 +12,16 @@ class UserController extends BaseController
 	// Retornar la vista para añadir/editar/eliminar usuario 
 	public function crudUser()
 	{	
+		if (BaseController::$msg) 
+		{
+			BaseController::msgSuccess(BaseController::$msg);
+		}
+
 		if (isset($_GET['user_id'])) 
 		{
 			$userID = $_GET['user_id'];
-			$user = new User();
-			$user = $user->getUserById($userID);
+			$userModel = new User();
+			$user = $userModel->getUserById($userID);
 		}
 
 		$rol = new Rol();
@@ -26,29 +31,43 @@ class UserController extends BaseController
 		require_once($include);
 	}
 
+	// Posiciones de los usuarios por puntuacion
+	public function positionsUsers()
+	{
+		$userModel = new User();
+		$users = $userModel->getPositionsUsers();
+
+		$include = '../Views/components/positions_users.php';
+		require_once($include);
+	}
+
 	// Almacenar en db un nuevo usuario
 	public function storeUser()
 	{
-		if (isset($_POST)) 
+		if (isset($_POST) && !empty($_POST['pass']) && ($_POST['pass'] == $_POST['confirmPass'])) 
 		{
-			$name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-			$lastName = filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
-			$dni = filter_var($_POST['dni'], FILTER_SANITIZE_STRING);
-			$phone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
-			$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+			//obtener datos del formulario eliminar espacios al inicio/fin y sanitizar
+			$name = trim(filter_var($_POST['name'], FILTER_SANITIZE_STRING));
+			$lastName = trim(filter_var($_POST['lastName'], FILTER_SANITIZE_STRING));
+			$dni = trim(filter_var($_POST['dni'], FILTER_SANITIZE_STRING));
+			$phone = trim(filter_var($_POST['phone'], FILTER_SANITIZE_STRING));
+			$email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 			$pass = md5(filter_var($_POST['pass'], FILTER_SANITIZE_STRING));
 			$created = date("Y-m-d H:i:s");
-			$rol_id = (int) $_POST['rol_id'];
+			$rol_id = filter_var($_POST['rol_id'], FILTER_VALIDATE_INT);
 
-			$user = new User();
-			$userID = $user->storeUser($name, $lastName, $dni, $phone, $email, $pass, $created, $rol_id);
+			$userModel = new User();
+			$userID = $userModel->storeUser($name, $lastName, $dni, $phone, $email, $pass, $created, $rol_id);
 			header('Location:../Views/page_admin.php?view=edit_user&user_id='.$userID);
-		}else{
+
+		}elseif($_POST['pass'] != $_POST['confirmPass'])
+		{
+			BaseController::msgDanger('Las contraseñas no coinciden!');
+		}else
+		{
 			BaseController::msgDanger('Ha ocurrido un error al intentar añadir el usuario!');
 			die();
 		}
-
-		
 	}
 
 	// Eliminar un usuario
@@ -56,11 +75,15 @@ class UserController extends BaseController
 	{
 		if (isset($_GET['user_id'])) 
 		{
-			$user = new User();
+			$userModel = new User();
 			$id = filter_var($_GET['user_id'], FILTER_VALIDATE_INT);
-			$response = $user->deleteUser($id);
+			$response = $userModel->deleteUser($id);
 
 			BaseController::msgValidate($response);
+		}else
+		{
+			BaseController::msgDanger('Ha ocurrido un error al intentar eliminar el usuario!');
+			die();
 		}
 
 		$this->allUsers();
@@ -74,11 +97,54 @@ class UserController extends BaseController
 			BaseController::msgSuccess(BaseController::$msg);
 		}
 		
-		$user = new User();
-		$users = $user->getUsers();
+		$userModel = new User();
+		$users = $userModel->getUsers();
 		$include = '../Views/components/all_users.php';
 		require_once($include);
 	}
+
+	// Actualizar usuario
+	public function updateUser()
+    {
+    	if (isset($_POST) && isset($_GET['user_id'])) 
+    	{
+    		//obtener datos del formulario eliminar espacios al inicio/fin y sanitizar
+    		$name = trim(filter_var($_POST['name'], FILTER_SANITIZE_STRING));
+			$lastName = trim(filter_var($_POST['lastName'], FILTER_SANITIZE_STRING));
+			$dni = trim(filter_var($_POST['dni'], FILTER_SANITIZE_STRING));
+			$phone = trim(filter_var($_POST['phone'], FILTER_SANITIZE_STRING));
+			$email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+			$pass = md5(filter_var($_POST['pass'], FILTER_SANITIZE_STRING));
+			$rol_id = filter_var($_POST['rol_id'], FILTER_VALIDATE_INT);
+			$id = filter_var($_GET['user_id'], FILTER_VALIDATE_INT);
+
+			$userModel = new User();
+
+	    	//actualizar todos los datos del usuario incluida contraseña
+	    	if (!empty($_POST['pass']) && ($_POST['pass'] == $_POST['confirmPass'])) 
+			{
+				$response = $userModel->updateUser($name, $lastName, $dni, $phone, $email, $pass, $rol_id, $id);
+				
+				BaseController::msgValidate($response);
+
+			// Actualizar todo menos la contraseña
+			}elseif(empty($_POST['pass']) && empty($_POST['confirmPass']))
+			{
+				$response = $userModel->updateUser($name, $lastName, $dni, $phone, $email, $pass='noUpdate', $rol_id, $id);
+				BaseController::msgValidate($response);
+
+			}elseif($_POST['pass'] != $_POST['confirmPass'])
+			{
+				BaseController::msgDanger('Las contraseñas no coinciden!');
+			}
+
+			$this->crudUser();
+		}else
+		{
+			BaseController::msgDanger('Ha ocurrido un error al intentar actualizar el usuario!');
+			die();
+		}
+    }
 }
 
 
