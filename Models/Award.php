@@ -36,7 +36,7 @@ class Award extends ConnectDB
         {
             return ["error" => false, "msg" => "Premio añadido!"];   
         }else{
-            return ["error" => true, "msg" => $this->conn->error];
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }       
     }
 
@@ -49,7 +49,7 @@ class Award extends ConnectDB
         {
             return ["error" => false, "msg" => "Premio eliminado!"];   
         }else{
-            return ["error" => true, "msg" => $this->conn->error];
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
 
@@ -62,7 +62,7 @@ class Award extends ConnectDB
         {
             return ["error" => false, "msg" => "Premio actualizado!"];   
         }else{
-            return ["error" => true, "msg" => $this->conn->error];
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
 }

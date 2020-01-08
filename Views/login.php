@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Login</title>
+  <title>Iniciar sesión</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,19 +23,22 @@
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Login</div>
+      <div class="card-header">Iniciar sesión</div>
+      <?php if (isset($_GET['logged']) && $_GET['logged'] == 'failed'): ?>
+        <?php echo '<div class="alert alert-danger" role="alert">'.'Email o contraseña invalido!'.'</div>';  ?>
+      <?php endif ?>
       <div class="card-body">
-        <form>
+        <form action="page_admin.php?view=login_user" method="POST">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
-              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Email" required="required" autofocus="autofocus">
+              <label for="email">Email</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required="required">
-              <label for="pass">Password</label>
+              <input type="password" id="pass" name="pass" class="form-control" placeholder="Contraseña" required="required">
+              <label for="pass">Contraseña</label>
             </div>
           </div>
           <div class="form-group">
@@ -46,7 +49,7 @@
               </label>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="index.php">Iniciar sesión</a>
+          <input type="submit" class="btn btn-primary btn-block" value="Iniciar sesión">
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="register.php">Registrarse</a>

@@ -4,8 +4,6 @@
       <h1 class="display-1">404</h1>
       <p class="lead">Pagina no encontrada.
         <a href="javascript:history.back()">Ir atrás</a>
-        o
-        <a href="index.php">Ir al Escritorio</a>.</p>
     </div>
   </div>
 </div>

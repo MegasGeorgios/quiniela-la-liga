@@ -12,25 +12,44 @@ class User extends ConnectDB
     {
         parent::__construct();
     }
+
+    public function validateDniAndEmail($dni, $email)
+    {
+        $register = true;
+
+        $result = $this->conn->query("SELECT * FROM qn_user WHERE email='$email' OR dni='$dni'") or die($this->conn->error);
+        
+        if ($result->num_rows == 1) 
+        {
+            $register = false;
+        }
+
+        return $register;
+    }
+
+    // Validar credenciales para loguearse
+    public function loginUser($email, $pass)
+    {
+        $result = $this->conn->query("SELECT qn_user.id as user_id, qn_user.name, qn_rol.rol FROM qn_user INNER JOIN qn_rol ON qn_user.rol_id=qn_rol.id WHERE email='$email' AND pass='$pass'") or die($this->conn->error);
+        
+        if ($result->num_rows == 1) 
+        {
+            $userData = $result->fetch_assoc();
+            $user['logged'] = true;
+            $user['userData'] = $userData;
+
+            return $user;
+        }
+        
+        $user['logged'] = false;
+
+        return $user;
+    }
     
     // Obtener todos los usuarios
     public function getUsers()
     {        
         $result = $this->conn->query("SELECT * FROM qn_user") or die($this->conn->error);
-        
-        $rows = array();
-        
-        while ($row = $result->fetch_assoc()) {
-            $rows[] = $row;
-        }
-        
-        return $rows;
-    }
-
-    // Obterner usuarios por puntuacion
-    public function getPositionsUsers()
-    {        
-        $result = $this->conn->query("SELECT * FROM qn_user INNER JOIN qn_scorer ON qn_scorer.user_id=qn_user.id ORDER BY points DESC") or die($this->conn->error);
         
         $rows = array();
         
@@ -58,8 +77,6 @@ class User extends ConnectDB
 
         $userID = $this->conn->insert_id;
         
-         $this->conn->query("INSERT INTO qn_scorer (points, user_id) VALUES (0, $userID)");
-
         return $userID;        
     }
 
@@ -72,7 +89,7 @@ class User extends ConnectDB
         {
             return ["error" => false, "msg" => "Usuario eliminado!"];   
         }else{
-            return ["error" => true, "msg" => $this->conn->error];
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
 
@@ -92,7 +109,7 @@ class User extends ConnectDB
         {
             return ["error" => false, "msg" => "Usuario actualizado!"];   
         }else{
-            return ["error" => true, "msg" => $this->conn->error];
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
 }

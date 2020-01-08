@@ -2,7 +2,7 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Añadir partidos por jornada</div>
       <div class="card-body">
-        <form>
+        <form action="page_admin.php?view=store_match" method="POST">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-12">
@@ -19,32 +19,30 @@
           </div>
           <div class="form-group">
             <div class="form-row">
-            <?php for($i=1; $i < 11; $i++) { ?> 
+            <?php for($i=1; $i < 4; $i++) { ?> 
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <select class="form-control">
+                  <select class="form-control" name="homeTeams[]">
                     <option value="0">Equipo local</option>
-                    <option value="1">Equipo 1</option>
-                    <option value="2">Equipo 2</option>
-                    <option value="3">Equipo 3</option>
-                    <option value="4">Equipo 4</option>
+                    <?php foreach ($teams as $team) { ?> 
+                    <option value="<?= $team['id'].'-'.$team['name'] ?>"><?= $team['name'] ?></option>
+                    <?php } ?> 
                   </select>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <select class="form-control">
+                  <select class="form-control" name="visitTeams[]">
                     <option value="0">Equipo visitante</option>
-                    <option value="1">Equipo 1</option>
-                    <option value="2">Equipo 2</option>
-                    <option value="3">Equipo 3</option>
-                    <option value="4">Equipo 4</option>
+                    <?php foreach ($teams as $team) { ?> 
+                    <option value="<?= $team['id'].'-'.$team['name'] ?>"><?= $team['name'] ?></option>
+                    <?php } ?> 
                   </select>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-label-group">
-                  <input type="date" class="form-control" style="padding-top: 6px;" name="match_date" 
+                  <input type="date" class="form-control" style="padding-top: 6px;" name="match_dates[]" 
                   value="<?= date("Y-m-d"); ?>" 
                   min="2019-08-01" max="2020-07-01">
                 </div>

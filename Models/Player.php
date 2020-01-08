@@ -68,7 +68,7 @@ class Player extends ConnectDB
         {
             return ["error" => false, "msg" => "Jugador eliminado!"];   
         }else{
-            return ["error" => true, "msg" => $this->conn->error];
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
 
@@ -81,7 +81,7 @@ class Player extends ConnectDB
         {
             return ["error" => false, "msg" => "Jugador actualizado!"];   
         }else{
-            return ["error" => true, "msg" => $this->conn->error];
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
 }

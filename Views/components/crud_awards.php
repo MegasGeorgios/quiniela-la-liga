@@ -7,7 +7,7 @@
             <div class="form-row">
               <div class="col-md-5">
                 <div class="form-group">
-                    <input type="number" class="form-control" id="position" name="position" min="0" placeholder="Posicion">
+                    <input type="number" class="form-control" id="position" name="position" min="0" placeholder="Aciertos">
                 </div>
               </div>
               <div class="col-md-5">
@@ -33,8 +33,8 @@
               <div class="form-row">
                 <div class="col-md-4">
                   <div class="form-label-group">
-                      <input type="number" class="form-control" id="position-<?= $award['id']; ?>" name="position" min="0" placeholder="Posicion" value="<?= $award['position']; ?>">
-                      <label for="position-<?= $award['id']; ?>">Posicion</label>
+                      <input type="number" class="form-control" id="position-<?= $award['id']; ?>" name="position" min="0" max="10" placeholder="Aciertos" value="<?= $award['position']; ?>">
+                      <label for="position-<?= $award['id']; ?>">Aciertos</label>
                   </div>
                 </div>
                 <div class="col-md-4">

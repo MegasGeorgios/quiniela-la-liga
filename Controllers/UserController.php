@@ -31,16 +31,6 @@ class UserController extends BaseController
 		require_once($include);
 	}
 
-	// Posiciones de los usuarios por puntuacion
-	public function positionsUsers()
-	{
-		$userModel = new User();
-		$users = $userModel->getPositionsUsers();
-
-		$include = '../Views/components/positions_users.php';
-		require_once($include);
-	}
-
 	// Almacenar en db un nuevo usuario
 	public function storeUser()
 	{
@@ -49,13 +39,18 @@ class UserController extends BaseController
 			//obtener datos del formulario eliminar espacios al inicio/fin y sanitizar
 			$name = trim(filter_var($_POST['name'], FILTER_SANITIZE_STRING));
 			$lastName = trim(filter_var($_POST['lastName'], FILTER_SANITIZE_STRING));
-			$dni = trim(filter_var($_POST['dni'], FILTER_SANITIZE_STRING));
+			$dni = strtoupper(trim(filter_var($_POST['dni'], FILTER_SANITIZE_STRING)));
 			$phone = trim(filter_var($_POST['phone'], FILTER_SANITIZE_STRING));
 			$email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 			$pass = md5(filter_var($_POST['pass'], FILTER_SANITIZE_STRING));
 			$created = date("Y-m-d H:i:s");
-			$rol_id = filter_var($_POST['rol_id'], FILTER_VALIDATE_INT);
 
+			if (isset($_POST['rol_id'])) {
+				$rol_id = filter_var($_POST['rol_id'], FILTER_VALIDATE_INT);
+			}else{
+				$rol_id = 2; // rol por defecto (no admin)
+			}
+			
 			$userModel = new User();
 			$userID = $userModel->storeUser($name, $lastName, $dni, $phone, $email, $pass, $created, $rol_id);
 			header('Location:../Views/page_admin.php?view=edit_user&user_id='.$userID);
@@ -116,7 +111,14 @@ class UserController extends BaseController
 			$email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 			$pass = md5(filter_var($_POST['pass'], FILTER_SANITIZE_STRING));
 			$rol_id = filter_var($_POST['rol_id'], FILTER_VALIDATE_INT);
-			$id = filter_var($_GET['user_id'], FILTER_VALIDATE_INT);
+
+			if ($_SESSION['user_rol'] == "Administrador") 
+			{
+				$id = filter_var($_GET['user_id'], FILTER_VALIDATE_INT);
+			}else
+			{	
+				$id = $_SESSION['user_id'];
+			}
 
 			$userModel = new User();
 

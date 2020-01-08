@@ -1,3 +1,28 @@
+<?php 
+session_start(); 
+
+// Si no ha iniciado sesion redirigir al login
+
+if ($_SESSION['status'] == 'failed') 
+{
+  header('Location:login.php?logged=failed');
+
+}elseif($_SESSION['status'] == 'failedPass')
+{
+  header('Location:register.php?registered=failedPass');
+
+}/*elseif($_SESSION['status'] == 'failedExist')
+{
+  header('Location:register.php?registered=failedExist');
+
+}*/elseif (!isset($_SESSION['user_id']))
+{
+  header('Location:login.php');
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +49,7 @@
 
 <body id="page-top">
 
-  <?php include_once('layout/nav-bar.html'); ?>
+  <?php include_once('layout/nav-bar.php'); ?>
 
   <div id="wrapper">
 

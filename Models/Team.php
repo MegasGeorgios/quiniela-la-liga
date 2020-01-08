@@ -54,7 +54,7 @@ class Team extends ConnectDB
         {
             return ["error" => false, "msg" => "Equipo eliminado!"];   
         }else{
-            return ["error" => true, "msg" => $this->conn->error];
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
 
@@ -67,7 +67,7 @@ class Team extends ConnectDB
         {
             return ["error" => false, "msg" => "Equipo actualizado!"];   
         }else{
-            return ["error" => true, "msg" => $this->conn->error];
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
 }

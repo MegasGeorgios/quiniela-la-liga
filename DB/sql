@@ -3,6 +3,9 @@ CREATE TABLE IF NOT EXISTS qn_rol (
     rol VARCHAR(50) NOT NULL
 );
 
+INSERT INTO qn_rol (id, rol) VALUES (1, "Administrador");
+INSERT INTO qn_rol (id, rol) VALUES (2, "Suscriptor");
+
 CREATE TABLE IF NOT EXISTS qn_user (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
@@ -17,9 +20,10 @@ CREATE TABLE IF NOT EXISTS qn_user (
 );
 
 CREATE TABLE IF NOT EXISTS qn_team ( 
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    slug VARCHAR(100) NOT NULL
+    slug VARCHAR(100) NOT NULL,
+    PRIMARY KEY(id, name)
 );
 
 CREATE TABLE IF NOT EXISTS qn_player (
@@ -45,10 +49,12 @@ CREATE TABLE IF NOT EXISTS qn_match (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_team_home INT NOT NULL,
     id_team_visit INT NOT NULL,
+    name_team_home VARCHAR(100) NOT NULL,
+    name_team_visit VARCHAR(100) NOT NULL,
     fixture INT NOT NULL,
     match_date DATETIME NOT NULL,
-    FOREIGN KEY (id_team_home) REFERENCES qn_team (id) ON DELETE CASCADE,
-    FOREIGN KEY (id_team_visit) REFERENCES qn_team (id) ON DELETE CASCADE
+    FOREIGN KEY (id_team_home,name_team_home) REFERENCES qn_team (id,name) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (id_team_visit,name_team_visit) REFERENCES qn_team (id,name) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS qn_result (
@@ -68,19 +74,11 @@ CREATE TABLE IF NOT EXISTS qn_football_pool (
 
 CREATE TABLE IF NOT EXISTS qn_football_pool_result (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    score_home INT NOT NULL,
-    score_visit INT NOT NULL,
+    prognostic VARCHAR(5) NOT NULL,
     pool_id INT NOT NULL,
     match_id INT NOT NULL,
     FOREIGN KEY (match_id) REFERENCES qn_match (id) ON DELETE CASCADE,
     FOREIGN KEY (pool_id) REFERENCES qn_football_pool (id) ON DELETE CASCADE   
-);
-
-CREATE TABLE IF NOT EXISTS qn_scorer (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-    points INT NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES qn_user (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS qn_award (
