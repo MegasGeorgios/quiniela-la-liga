@@ -36,15 +36,6 @@ CREATE TABLE IF NOT EXISTS qn_player (
     FOREIGN KEY (team_id) REFERENCES qn_team (id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS qn_standing (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    team_id INT NOT NULL,
-    points INT DEFAULT 0,
-    gf INT DEFAULT 0,
-    gc INT DEFAULT 0,
-    FOREIGN KEY (team_id) REFERENCES qn_team (id) ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS qn_match ( 
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_team_home INT NOT NULL,

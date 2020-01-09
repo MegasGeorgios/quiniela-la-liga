@@ -70,7 +70,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 	}
 
 // Rutas para equipo
-}elseif (isset($_GET['view']) && ($_GET['view'] == 'add_team' || $_GET['view'] == 'edit_team' || $_GET['view'] == 'store_team' || $_GET['view'] == 'delete_team' || $_GET['view'] == 'update_team' || $_GET['view'] == 'all_teams'))
+}elseif (isset($_GET['view']) && ($_GET['view'] == 'add_team' || $_GET['view'] == 'edit_team' || $_GET['view'] == 'store_team' || $_GET['view'] == 'delete_team' || $_GET['view'] == 'update_team' || $_GET['view'] == 'all_teams' || $_GET['view'] == 'positions_teams'))
 {
 	$title = $_GET['view'] == 'add_team' ? 'Admin - Añadir Equipo' : 'Admin - Editar Equipo';
 	$include = '../Controllers/TeamController.php';
@@ -91,7 +91,12 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 	}elseif ($_GET['view'] == 'all_teams') {
 		$title = 'Admin - Todos los equipos';
 		$method = 'allTeams';
+	}elseif ($_GET['view'] == 'positions_teams') {
+		$title = 'Admin - Clasificación';
+		$method = 'positionsTeams';
 	}
+
+
 
 // Rutas para jugador
 }elseif (isset($_GET['view']) && ($_GET['view'] == 'add_player' || $_GET['view'] == 'edit_player' || $_GET['view'] == 'store_player' || $_GET['view'] == 'delete_player' || $_GET['view'] == 'update_player' || $_GET['view'] == 'all_players-goals' || $_GET['view'] == 'all_players-asists'))
@@ -147,7 +152,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 	}
 
 // Rutas resultados y partidos
-}elseif (isset($_GET['view']) && ($_GET['view'] == 'add_result' || $_GET['view'] == 'store_result' || $_GET['view'] == 'edit_result' || $_GET['view'] == 'add_match' || $_GET['view'] == 'store_match' ||  $_GET['view'] == 'all_results'))
+}elseif (isset($_GET['view']) && ($_GET['view'] == 'add_result' || $_GET['view'] == 'store_result' || $_GET['view'] == 'edit_result' || $_GET['view'] == 'update_result' || $_GET['view'] == 'delete_result' || $_GET['view'] == 'add_match' || $_GET['view'] == 'store_match' ||  $_GET['view'] == 'all_results'))
 {
 	$title = $_GET['view'] == 'add_result' ? 'Admin - Añadir Resultados' : 'Admin - Editar Resultado';
 	$include = '../Controllers/GameController.php';
@@ -157,6 +162,10 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 		$method = 'crudResult';
 	}elseif ($_GET['view'] == 'store_result') {
 		$method = 'storeResult';
+	}elseif ($_GET['view'] == 'delete_result') {
+		$method = 'deleteResult';
+	}elseif ($_GET['view'] == 'update_result') {
+		$method = 'updateResult';
 	}elseif ($_GET['view'] == 'add_match') {
 		$method = 'crudMatch';
 	}elseif ($_GET['view'] == 'store_match') {
@@ -164,16 +173,6 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 	}elseif ($_GET['view'] == 'all_results') {
 		$method = 'showMatchesAndResults';
 	}
-
-}elseif (isset($_GET['view']) && $_GET['view'] == 'positions_teams')
-{
-	$title = 'Admin - Clasificación';
-	$include = 'components/positions_teams.php';
-
-}elseif (isset($_GET['view']) && $_GET['view'] == 'charts')
-{
-	$title = 'Admin - Estadisticas';
-	$include = 'components/charts.php';
 
 }else{
 	$title = 'Admin - No encontrada';

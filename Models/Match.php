@@ -86,6 +86,8 @@ class Match extends ConnectDB
     public function storeResult($score_home, $score_visit, $match_id)
     {        
         $this->conn->query("INSERT INTO qn_result (score_home, score_visit, match_id) VALUES ($score_home, $score_visit, $match_id)");
+
+        //$this->conn->query("INSERT INTO qn_result (score_home, score_visit, match_id) VALUES ($score_home, $score_visit, $match_id)");
        
         if (!$this->conn->error) 
         {
@@ -95,6 +97,7 @@ class Match extends ConnectDB
         }    
     }
 
+    // Obtener un resultado
     public function getResultById($id)
     {
         $result = $this->conn->query("SELECT  qn_match.name_team_home, qn_match.name_team_visit, qn_result.id as result_id, qn_result.score_home, qn_result.score_visit FROM qn_match LEFT JOIN qn_result ON qn_match.id=qn_result.match_id WHERE qn_result.id=$id") or die($this->conn->error);
@@ -102,6 +105,32 @@ class Match extends ConnectDB
         $row = $result->fetch_assoc();
         
         return $row;
+    }
+
+    // Borrar Resultado por id
+    public function deleteResult($id)
+    {   
+        $this->conn->query("DELETE FROM qn_result WHERE id=$id");
+
+        if (!$this->conn->error) 
+        {
+            return ["error" => false, "msg" => "Resultado eliminado!"];   
+        }else{
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
+        }
+    }
+
+    // Actualizar resultado 
+    public function updateResult($score_home, $score_visit, $id)
+    {   
+        $this->conn->query("UPDATE qn_result SET score_home=$score_home, score_visit=$score_visit WHERE id=$id");
+        
+        if (!$this->conn->error) 
+        {
+            return ["error" => false, "msg" => "Resultado actualizado!"];   
+        }else{
+            return ["error" => true, "msg" => "Ha ocurrido un error!"];
+        }
     }
 }
 

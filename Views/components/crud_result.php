@@ -60,8 +60,8 @@
           </form>
         <?php } ?>
 
-        <?php if ($_GET['view'] == 'edit_result') { ?>
-          <form action="#update">
+        <?php if ($_GET['view'] == 'edit_result' || $_GET['view'] == 'update_result') { ?>
+          <form action="page_admin.php?view=update_result&result_id=<?= $result['result_id'];?>" method="POST">
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-4">
@@ -89,7 +89,7 @@
             </div>
             <div>
               <input type="submit" class="btn btn-primary" value="Actualizar">
-              <a href="#delete" class="btn btn-primary">Eliminar</a>
+              <a href="page_admin.php?view=delete_result&result_id=<?= $result['result_id'];?>" class="btn btn-primary">Eliminar</a>
             </div>
           </form>
         <?php } ?>

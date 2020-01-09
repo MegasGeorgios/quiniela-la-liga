@@ -99,9 +99,55 @@ class GameController extends BaseController
 		$this->crudResult();
 	}
 
+	// Actualizar resultado
+	public function updateResult()
+    {
+    	if (isset($_POST)) 
+    	{
+    		//obtener datos del formulario
+    		$score_home = filter_var($_POST['score_home'], FILTER_VALIDATE_INT);
+    		$score_visit = filter_var($_POST['score_visit'], FILTER_VALIDATE_INT);
+			$id = filter_var($_POST['result_id'], FILTER_VALIDATE_INT);
+
+			$matchModel = new Match();
+			$response = $matchModel->updateResult($score_home, $score_visit, $id);
+			BaseController::msgValidate($response);
+
+			$this->crudResult();
+		}else
+		{
+			BaseController::msgDanger('Ha ocurrido un error al intentar actualizar el resultado!');
+			die();
+		}
+    }
+
+	// Eliminar un resultado
+	public function deleteResult()
+	{
+		if (isset($_GET['result_id'])) 
+		{
+			$matchModel = new Match();
+			$id = filter_var($_GET['result_id'], FILTER_VALIDATE_INT);
+			$response = $matchModel->deleteResult($id);
+
+			BaseController::msgValidate($response);
+		}else
+		{
+			BaseController::msgDanger('Ha ocurrido un error al intentar eliminar el resultado!');
+			die();
+		}
+
+		$this->showMatchesAndResults();
+	}
+
 	// Mostrar los partidos y resultados
 	public function showMatchesAndResults()
 	{	
+		if (BaseController::$msg) 
+		{
+			BaseController::msgSuccess(BaseController::$msg);
+		}
+
 		$teamModel = new Team();
 		$matchModel = new Match();
 

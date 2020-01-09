@@ -10,6 +10,9 @@
           <tr>
             <th>#</th>
             <th>Equipo</th>
+            <th>Victorias</th>
+            <th>Empates</th>
+            <th>Derrotas</th>
             <th>Goles marcados</th>
             <th>Goles concedidos</th>
             <th>Diferencial</th>
@@ -20,6 +23,9 @@
           <tr>
             <th>#</th>
             <th>Equipo</th>
+            <th>Victorias</th>
+            <th>Empates</th>
+            <th>Derrotas</th>
             <th>Goles marcados</th>
             <th>Goles concedidos</th>
             <th>Diferencial</th>
@@ -27,14 +33,17 @@
           </tr>
         </tfoot>
         <tbody>
-          <?php for ($i=0; $i < 20; $i++) { ?>
+          <?php foreach ($standing as $index => $team) { ?>
             <tr>
-              <td><a href="#stats"><?= $i+1; ?></a></td>
-              <td><a href="#stats">Equipo <?= $i; ?></a></td>
-              <td><a href="#stats"><?= mt_rand(10,100);?></a></td>
-              <td><a href="#stats"><?= mt_rand(10,100);?></a></td>
-              <td><a href="#stats"><?= mt_rand(-10,10);?></a></td>
-              <td><a href="#stats"><?= mt_rand(10,100);?></a></td>
+              <td><?= $index+1; ?></td>
+              <td><?= $team['teamName'] ?></td>
+              <td><?= $team['wins'] ?></td>
+              <td><?= $team['draws'] ?></td>
+              <td><?= $team['loses'] ?></td>
+              <td><?= $team['goalsF'] ?></td>
+              <td><?= $team['goalsC'] ?></td>
+              <td><?= $team['diffGoals'] ?></td>
+              <td><?= $team['points'] ?></td>
             </tr>
           <?php } ?>
         </tbody>

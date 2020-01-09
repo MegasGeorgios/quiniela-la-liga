@@ -70,6 +70,19 @@ class Team extends ConnectDB
             return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
+
+    public function teamResults($team_id)
+    {
+        $result = $this->conn->query("SELECT qn_match.id_team_home, qn_match.id_team_visit, qn_result.score_home, qn_result.score_visit FROM qn_match INNER JOIN qn_result ON qn_match.id=qn_result.match_id WHERE qn_match.id_team_home=$team_id OR qn_match.id_team_visit=$team_id") or die($this->conn->error);
+        
+        $rows = array();
+        
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        
+        return $rows;
+    }
 }
 
 
