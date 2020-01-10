@@ -11,11 +11,7 @@ if ($_SESSION['status'] == 'failed')
 {
   header('Location:register.php?registered=failedPass');
 
-}/*elseif($_SESSION['status'] == 'failedExist')
-{
-  header('Location:register.php?registered=failedExist');
-
-}*/elseif (!isset($_SESSION['user_id']))
+}elseif (!isset($_SESSION['user_id']) || $_SESSION['user_id'] == 0)
 {
   header('Location:login.php');
 }

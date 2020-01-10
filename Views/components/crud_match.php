@@ -19,7 +19,7 @@
           </div>
           <div class="form-group">
             <div class="form-row">
-            <?php for($i=1; $i < 4; $i++) { ?> 
+            <?php for($i=1; $i < 11; $i++) { ?> 
               <div class="col-md-4">
                 <div class="form-label-group">
                   <select class="form-control" name="homeTeams[]">

@@ -1,78 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Quiniela la liga</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
-
-  <style type="text/css">
-  	body {
-	 background-image: url("estadio-futbol.jpg");
-	 background-repeat: no-repeat;
-	 background-size:100% 100%;
-	}
-
-	.top-front{
-		padding-top: 15px;
-	}
-
-	.left-nav{
-		padding-left: 10px;
-	}
-  </style>
-</head>
-
-<body class="bg-dark">
-
-<?php include('main_layout/layout/nav-bar-front.php'); ?>
+<?php include('main_layout/main_front_ini.php'); ?>
 
   <div class="container top-front">
    	
    	<?php 
 
-   		if (isset($_GET['view']) && $_GET['view'] == 'edit_user') 
+   		// ruta editar perfil
+   		if (isset($_GET['view']) && $_GET['view'] == 'edit_user' || $_GET['view'] == 'update_user') 
 		{
-			
 			$include = '../Controllers/UserController.php';
 			$controller = 'UserController';
-			$method = 'crudUser';
 			
+			if ($_GET['view'] == 'update_user') 
+			{
+				$method = 'updateUser';
+			}else{
+				$method = 'crudUser';
+			}
+		
+		// ruta ver goleadores de la liga
 		}elseif (isset($_GET['view']) && $_GET['view'] == 'all_players-goals') 
 		{
 			$include = '../Controllers/PlayerController.php';
 			$controller = 'PlayerController';
 			$method = 'TopGoalsPlayers';
 			
+		// ruta ver asistidores de la liga
 		}elseif (isset($_GET['view']) && $_GET['view'] == 'all_players-asists') 
 		{
 			$include = '../Controllers/PlayerController.php';
 			$controller = 'PlayerController';
 			$method = 'TopAsistsPlayers';
 
-		}elseif (isset($_GET['view']) && $_GET['view'] == 'all_results') {
+		// ruta ver los resultados de los partidos
+		}elseif (isset($_GET['view']) && $_GET['view'] == 'all_results') 
+		{
 			$include = '../Controllers/GameController.php';
 			$controller = 'GameController';
 			$method = 'showMatchesAndResults';
+
+		// ruta ver la tabla de clasificaion de la liga
+		}elseif (isset($_GET['view']) && $_GET['view'] == 'positions_teams' || !isset($_GET['view'])) 
+		{
+			$include = '../Controllers/TeamController.php';
+			$controller = 'TeamController';
+			$method = 'positionsTeams';
 		}else
 		{	
 			$include = '404.php';
 		}
 
-		include_once($include);
 		if ($include != '404.php') 
-		{
+		{	
+			include_once($include);
 			$controller = new $controller;
 			call_user_func( array( $controller, $method ) );
 		}

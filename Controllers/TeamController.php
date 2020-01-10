@@ -8,6 +8,14 @@ require_once('../Models/Team.php');
  */
 class TeamController extends BaseController
 {
+	public function dashboard()
+	{
+		$teamModel = new Team();
+		$teams = $teamModel->getTeams();
+		include_once('components/all_teams.php');
+		$this->positionsTeams();
+	}
+
 	// Retornar la vista para añadir/editar/eliminar equipo 
 	public function crudTeam()
 	{	

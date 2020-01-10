@@ -4,8 +4,15 @@
     <div class="card-header"><?= $header ?></div>
     <div class="card-body">
 
-      <?php if($_GET['view'] == 'add_user'){ ?>
-      <form action="page_admin.php?view=store_user" method="POST">
+      <?php 
+      $url = $_SERVER['HTTP_REFERER'];
+      $pos = strpos($url, 'home.php');
+      
+      // si estamos en la home
+      if ($pos !== false) { ?>
+        <form action="home.php?view=update_user&user_id=<?= $_GET['user_id']; ?>" method="POST">
+      <?php }elseif($_GET['view'] == 'add_user'){ ?>
+        <form action="page_admin.php?view=store_user" method="POST">
       <?php }elseif ($_GET['view'] == 'edit_user' || $_GET['view'] == 'update_user') { ?>
         <form action="page_admin.php?view=update_user&user_id=<?= $_GET['user_id']; ?>" method="POST">
       <?php } ?>

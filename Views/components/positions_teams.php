@@ -10,9 +10,15 @@
           <tr>
             <th>#</th>
             <th>Equipo</th>
-            <th>Victorias</th>
-            <th>Empates</th>
-            <th>Derrotas</th>
+            <th>*V</th>
+            <th>*E</th>
+            <th>*D</th>
+            <th>*VL</th>
+            <th>*EL</th>
+            <th>*DL</th>
+            <th>*VV</th>
+            <th>*EV</th>
+            <th>*DV</th>
             <th>Goles marcados</th>
             <th>Goles concedidos</th>
             <th>Diferencial</th>
@@ -23,9 +29,15 @@
           <tr>
             <th>#</th>
             <th>Equipo</th>
-            <th>Victorias</th>
-            <th>Empates</th>
-            <th>Derrotas</th>
+            <th>*V</th>
+            <th>*E</th>
+            <th>*D</th>
+            <th>*VL</th>
+            <th>*EL</th>
+            <th>*DL</th>
+            <th>*VV</th>
+            <th>*EV</th>
+            <th>*DV</th>
             <th>Goles marcados</th>
             <th>Goles concedidos</th>
             <th>Diferencial</th>
@@ -40,6 +52,12 @@
               <td><?= $team['wins'] ?></td>
               <td><?= $team['draws'] ?></td>
               <td><?= $team['loses'] ?></td>
+              <td><?= $team['winsLocal'] ?></td>
+              <td><?= $team['drawsLocal'] ?></td>
+              <td><?= $team['losesLocal'] ?></td>
+              <td><?= $team['winsVisit'] ?></td>
+              <td><?= $team['drawsVisit'] ?></td>
+              <td><?= $team['losesVisit'] ?></td>
               <td><?= $team['goalsF'] ?></td>
               <td><?= $team['goalsC'] ?></td>
               <td><?= $team['diffGoals'] ?></td>
@@ -50,4 +68,7 @@
       </table>
     </div>
   </div>
+  <div class="card-footer small text-muted">*V = Victorias, *E = Empates, *D = Derrotas</div>
+  <div class="card-footer small text-muted">*VL = Victorias como local, *EL = Empates como local, *DL = Derrotas como local</div>
+  <div class="card-footer small text-muted">*VL = Victorias como visitante, *EL = Empates como visitante, *DL = Derrotas como visitante</div>
 </div>

@@ -3,7 +3,7 @@
     <?php 
     $url = $_SERVER['HTTP_REFERER'];
     $pos = strpos($url, 'home.php');
-
+    
     if ($pos === false) { ?>
       <form class="form-inline" action="page_admin.php?view=all_results" method="POST">
     <?php }else{ ?>
@@ -54,40 +54,10 @@
           </tr>
         </tfoot>
         <tbody>
-          <?php if (isset($matches)) { ?>
-          <?php foreach($matches as $match) { ?>
-            <tr>
-              <td>
-                <a href="page_admin.php?view=edit_team&team_id=<?= $match['id_team_home']; ?>"><?= $match['name_team_home']; ?>
-                </a>
-              </td>
-              <td>
-                <?php 
-                $sc1 = ($match['score_home'] != '') ? $match['score_home'] : 'x';
-                $sc2 = ($match['score_visit'] != '') ? $match['score_visit'] : 'x'; 
-                
-                if ($sc1 == 'x' || $sc2 == 'x') { ?>
-                  <a href="#"><?= $sc1.'-'.$sc2; ?>
-                  </a>
-                <?php }else{ ?>
-                  <a href="page_admin.php?view=edit_result&result_id=<?= $match['result_id']; ?>"><?= $sc1.'-'.$sc2; ?>
-                  </a>
-                <?php } ?>
-              </td>
-              <td>
-                <a href="page_admin.php?view=edit_team&team_id=<?= $match['id_team_visit']; ?>"><?= $match['name_team_visit']; ?>
-                </a>
-              </td>
-              <td>
-                <?= $match['fixture']; ?>
-              </td>
-              <td>
-                <?php $date = date_create($match['match_date']); ?>
-                <?= date_format($date, 'd-m-Y'); ?>
-              </td>
-            </tr>
-          <?php } ?>
-          <?php } ?>
+        <?php if (isset($matches)) 
+        {  
+            include_once('templates/tpl_all_results.php'); 
+        } ?>
         </tbody>
       </table>
     </div>

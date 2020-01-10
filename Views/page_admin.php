@@ -4,12 +4,12 @@
 if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 {
 	$title= 'Admin - Dashboard';
-	$include = '../Controllers/AuthController.php';
-	$controller = 'AuthController';
-	$method = 'index';
+	$include = '../Controllers/TeamController.php';
+	$controller = 'TeamController';
+	$method = 'dashboard';
 
 // Rutas para usuarios
-}elseif (isset($_GET['view']) && ($_GET['view'] == 'add_user' || $_GET['view'] == 'edit_user' || $_GET['view'] == 'store_user' || $_GET['view'] == 'delete_user' || $_GET['view'] == 'update_user' || $_GET['view'] == 'all_users' /*|| $_GET['view'] == 'positions_users'*/))
+}elseif (isset($_GET['view']) && ($_GET['view'] == 'add_user' || $_GET['view'] == 'edit_user' || $_GET['view'] == 'store_user' || $_GET['view'] == 'delete_user' || $_GET['view'] == 'update_user' || $_GET['view'] == 'all_users'))
 {
 	$title= $_GET['view'] == 'add_user' ? 'Admin - Añadir Usuario' : 'Admin - Editar Usuario';
 	$include = '../Controllers/UserController.php';
@@ -30,10 +30,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 	}elseif ($_GET['view'] == 'all_users') {
 		$title = 'Admin - Todos los usuarios';
 		$method = 'allUsers';
-	}/*elseif ($_GET['view'] == 'positions_users') {
-		$title = 'Admin - Posiciones';
-		$method = 'positionsUsers';
-	}*/
+	}
 
 //Rutas para roles
 }elseif (isset($_GET['view']) && ($_GET['view'] == 'roles' || $_GET['view'] == 'store_rol' || $_GET['view'] == 'delete_rol' || $_GET['view'] == 'update_rol'))
@@ -95,8 +92,6 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 		$title = 'Admin - Clasificación';
 		$method = 'positionsTeams';
 	}
-
-
 
 // Rutas para jugador
 }elseif (isset($_GET['view']) && ($_GET['view'] == 'add_player' || $_GET['view'] == 'edit_player' || $_GET['view'] == 'store_player' || $_GET['view'] == 'delete_player' || $_GET['view'] == 'update_player' || $_GET['view'] == 'all_players-goals' || $_GET['view'] == 'all_players-asists'))
@@ -181,10 +176,9 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 
 include_once('main_layout/main_ini.php');
 
-include_once($include);
-
 if ($include != '404.php') 
 {
+	include_once($include);
 	$controller = new $controller;
 	call_user_func( array( $controller, $method ) );
 }

@@ -9,14 +9,6 @@ require_once('../Models/Team.php');
  */
 class AuthController extends BaseController
 {
-	public function index()
-	{
-		$teamModel = new Team();
-		$teams = $teamModel->getTeams();
-		include_once('components/all_teams.php');
-		include_once('components/positions_teams.php');
-	}
-
 	// Login usuario
 	public function loginUser()
 	{	

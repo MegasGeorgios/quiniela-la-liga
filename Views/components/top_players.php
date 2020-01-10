@@ -25,22 +25,10 @@
           </tr>
         </thead>
         <tbody>
-          <?php if (isset($players)) { ?>
-          <?php foreach($players as $index => $player) { ?>
-            <tr>
-              <td><a href="page_admin.php?view=edit_player&player_id=<?= $player['id']; ?>"><?= $index+1 ?></a></td>
-              <td><a href="page_admin.php?view=edit_player&player_id=<?= $player['id']; ?>"><?= $player['name'] ?></a></td>
-              <td><a href="page_admin.php?view=edit_player&player_id=<?= $player['id']; ?>"><?= $player['dorsal'] ?></a></td>
-              <td><a href="page_admin.php?view=edit_player&player_id=<?= $player['id']; ?>"><?= $player['name_team'] ?></a></td>
-              <!--Si estamos en la vista de top goleadores pintamos los goles si no las asistencias-->
-              <?php if($_GET['view'] == 'all_players-goals'){ ?>
-              <td><a href="page_admin.php?view=edit_player&player_id=<?= $player['id']; ?>"><?= $player['goals'] ?></a></td>
-              <?php }else{ ?>
-              <td><a href="page_admin.php?view=edit_player&player_id=<?= $player['id']; ?>"><?= $player['asists'] ?></a></td>
-              <?php } ?>
-            </tr>
-          <?php } ?>
-          <?php } ?>
+          <?php if (isset($players))
+          {  
+            include_once('templates/tpl_top_players.php'); 
+          } ?>
         </tbody>
       </table>
     </div>
