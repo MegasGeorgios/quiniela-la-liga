@@ -132,6 +132,16 @@ class Match extends ConnectDB
             return ["error" => true, "msg" => "Ha ocurrido un error!"];
         }
     }
+
+    // Obtener jornada por fecha
+    public function getFixtureByDate($date)
+    {
+        $result = $this->conn->query("SELECT  qn_match.fixture FROM qn_match WHERE match_date='$date' OR match_date>'$date' LIMIT 1") or die($this->conn->error);
+        
+        $row = $result->fetch_assoc();
+        
+        return $row;
+    }
 }
 
 

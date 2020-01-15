@@ -19,8 +19,8 @@
           </div>
           <div class="form-group">
             <div class="form-row">
-            <?php for($i=1; $i < 11; $i++) { ?> 
-              <div class="col-md-4">
+            <?php for($i=1; $i < 3; $i++) { ?> 
+              <div class="col-md-3">
                 <div class="form-label-group">
                   <select class="form-control" name="homeTeams[]">
                     <option value="0">Equipo local</option>
@@ -30,7 +30,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-label-group">
                   <select class="form-control" name="visitTeams[]">
                     <option value="0">Equipo visitante</option>
@@ -40,11 +40,17 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-label-group">
                   <input type="date" class="form-control" style="padding-top: 6px;" name="match_dates[]" 
                   value="<?= date("Y-m-d"); ?>" 
                   min="2019-08-01" max="2020-07-01">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-label-group">
+                  <input type="time" class="form-control" style="padding-top: 6px;" name="match_times[]" 
+                  value="<?= date("H:i"); ?>">
                 </div>
               </div>
             <?php } ?>

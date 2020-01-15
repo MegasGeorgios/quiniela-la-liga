@@ -59,6 +59,14 @@ class GameController extends BaseController
 			$visitTeams = $_POST['visitTeams'];
 			$fixture = $_POST['fixture'];
 			$match_dates = $_POST['match_dates'];
+			$match_times = $_POST['match_times'];
+
+			if ($fixture == 0) 
+			{
+				BaseController::msgDanger("Debes seleccionar una jornada !");
+
+				return;
+			}
 
 			$matchModel = new Match();
 
@@ -67,8 +75,9 @@ class GameController extends BaseController
 				// formato id-teamName, explode con delimitador '-' y obtenemos en posicion 0 el id y en pos 1 el nombre del equipo
 				$homeTeam[$i] = explode('-',$homeTeams[$i]);
 				$visitTeam[$i] = explode('-',$visitTeams[$i]);
-				
-				$response = $matchModel->storeMatch($homeTeam[$i][0], $visitTeam[$i][0], $homeTeam[$i][1], $visitTeam[$i][1], $fixture, $match_dates[$i]);
+				$dateTime = $match_dates[$i].' '.$match_times[$i];
+
+				$response = $matchModel->storeMatch($homeTeam[$i][0], $visitTeam[$i][0], $homeTeam[$i][1], $visitTeam[$i][1], $fixture, $dateTime);
 			}		
 
 			BaseController::msgValidate($response);

@@ -32,6 +32,19 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 		$method = 'allUsers';
 	}
 
+//Rutas para las quinielas
+}elseif (isset($_GET['view']) && ($_GET['view'] == 'show_pools' || $_GET['view'] == 'show_pool'))
+{
+	$title= $_GET['view'] == 'pools' ? 'Admin - Quinielas' : 'Admin - Pronósticos';
+	$include = '../Controllers/PoolController.php';
+	$controller = 'PoolController';
+
+	if ($_GET['view'] == 'show_pools') {
+		$method = 'getPoolsByUser';
+	}elseif ($_GET['view'] == 'show_pool') {
+		$method = 'showPool';
+	}
+
 //Rutas para roles
 }elseif (isset($_GET['view']) && ($_GET['view'] == 'roles' || $_GET['view'] == 'store_rol' || $_GET['view'] == 'delete_rol' || $_GET['view'] == 'update_rol'))
 {
@@ -176,9 +189,10 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 
 include_once('main_layout/main_ini.php');
 
+include_once($include);
+
 if ($include != '404.php') 
 {
-	include_once($include);
 	$controller = new $controller;
 	call_user_func( array( $controller, $method ) );
 }

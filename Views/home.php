@@ -5,7 +5,7 @@
    	<?php 
 
    		// ruta editar perfil
-   		if (isset($_GET['view']) && $_GET['view'] == 'edit_user' || $_GET['view'] == 'update_user') 
+   		if (isset($_GET['view']) && ($_GET['view'] == 'edit_user' || $_GET['view'] == 'update_user')) 
 		{
 			$include = '../Controllers/UserController.php';
 			$controller = 'UserController';
@@ -44,14 +44,35 @@
 			$include = '../Controllers/TeamController.php';
 			$controller = 'TeamController';
 			$method = 'positionsTeams';
+
+		// ruta mis quinielas
+		}elseif (isset($_GET['view']) && ($_GET['view'] == 'pools' || $_GET['view'] == 'pool' || $_GET['view'] == 'store_pool' || $_GET['view'] == 'add_pool')) 
+		{	
+			$include = '../Controllers/PoolController.php';
+			$controller = 'PoolController';
+			
+			if ($_GET['view'] == 'pools') 
+			{
+				$method = 'getPoolsByUser';
+			}elseif ($_GET['view'] == 'pool')
+			{
+				$method = 'showPool';
+			}elseif ($_GET['view'] == 'store_pool')
+			{
+				$method = 'storePool';
+			}else{
+				$method = 'addPool';
+			}
+
 		}else
 		{	
 			$include = '404.php';
 		}
 
+		include_once($include);
+
 		if ($include != '404.php') 
 		{	
-			include_once($include);
 			$controller = new $controller;
 			call_user_func( array( $controller, $method ) );
 		}

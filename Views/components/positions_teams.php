@@ -70,5 +70,5 @@
   </div>
   <div class="card-footer small text-muted">*V = Victorias, *E = Empates, *D = Derrotas</div>
   <div class="card-footer small text-muted">*VL = Victorias como local, *EL = Empates como local, *DL = Derrotas como local</div>
-  <div class="card-footer small text-muted">*VL = Victorias como visitante, *EL = Empates como visitante, *DL = Derrotas como visitante</div>
+  <div class="card-footer small text-muted">*VV = Victorias como visitante, *EV = Empates como visitante, *DV = Derrotas como visitante</div>
 </div>

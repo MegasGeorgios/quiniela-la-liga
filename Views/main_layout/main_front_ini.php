@@ -52,7 +52,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] == 0)
     <a class="navbar-brand mr-1 left-nav" href="home.php?view=all_results">Calendario</a>
     <a class="navbar-brand mr-1 left-nav" href="home.php?view=all_players-goals">Goleadores</a>
     <a class="navbar-brand mr-1 left-nav" href="home.php?view=all_players-asists">Asistidores</a>
-    <a class="navbar-brand mr-1 left-nav" href="#">Mis quinielas</a>
+    <a class="navbar-brand mr-1 left-nav" href="home.php?view=pools">Mis quinielas</a>
+    <a class="navbar-brand mr-1 left-nav" href="home.php?view=add_pool">Jugar quiniela</a>
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-12">

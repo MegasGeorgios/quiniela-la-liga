@@ -9,8 +9,6 @@
 
   </div>
   <!-- /#wrapper -->
-
-  <?php include_once('layout/modal-logout-scroll-buttom.html'); ?>
   
   <!-- / Scripts and libs -->
   <?php include_once('layout/scripts.html'); ?>

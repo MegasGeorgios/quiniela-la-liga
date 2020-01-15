@@ -4,7 +4,7 @@ require_once('BaseController.php');
 require_once('../Models/Rol.php');
 
 /**
- * Controlador User
+ * Controlador Rol
  */
 class RolController extends BaseController
 {

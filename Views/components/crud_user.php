@@ -70,12 +70,13 @@
             </div>
           </div>
         </div>
-        <?php if (isset($user['rol'])) { ?>
-          <?php if ($user['rol'] == "Administrador") { ?>
+          <?php if ($_SESSION['user_rol']== "Administrador") { ?>
           <div class="form-group">
             <div class="form-label-group">
               <select id="rol_id" name="rol_id" class="form-control">
-                  <option value="<?= $user['rol_id']; ?>" selected><?= $user['rol']; ?></option>
+                <?php if (isset($user['rol'])): ?>
+                      <option value="<?= $user['rol_id']; ?>" selected><?= $user['rol']; ?></option>
+                <?php endif ?>
                   <?php foreach ($roles as $rol) { ?>
                     <option value="<?= $rol['id']; ?>"><?= $rol['rol']; ?></option>
                   <?php } ?>
@@ -85,7 +86,6 @@
           <?php }else{ ?>
             <input type="hidden" name="rol_id" value="<?= $user['rol_id']; ?>" >
           <?php } ?>
-        <?php } ?>
 
         <?php if($_GET['view'] == 'add_user'){ ?>
           <div>

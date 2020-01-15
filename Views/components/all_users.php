@@ -11,6 +11,7 @@
             <th>Apellido(s)</th>
             <th>DNI</th>
             <th>Email</th>
+            <th>Quinielas</th>
             <th>Registrado</th>
           </tr>
         </thead>
@@ -20,6 +21,7 @@
             <th>Apellido(s)</th>
             <th>DNI</th>
             <th>Email</th>
+            <th>Quinielas</th>
             <th>Registrado</th>
           </tr>
         </tfoot>
@@ -31,6 +33,7 @@
               <td><a href="page_admin.php?view=edit_user&user_id=<?= $user['id']; ?>"><?= $user['lastname'] ?></a></td>
               <td><a href="page_admin.php?view=edit_user&user_id=<?= $user['id']; ?>"><?= $user['dni'] ?></a></td>
               <td><a href="page_admin.php?view=edit_user&user_id=<?= $user['id']; ?>"><?= $user['email'] ?></a></td>
+              <td><a href="page_admin.php?view=show_pools&user_id=<?= $user['id']; ?>">Ver quinielas</a></td>
               <td><a href="page_admin.php?view=edit_user&user_id=<?= $user['id']; ?>"><?= $user['created'] ?></a></td>
             </tr>
           <?php } ?>
