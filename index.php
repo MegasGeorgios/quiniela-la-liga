@@ -1,10 +1,8 @@
 <?php 
 session_start();
 
-if (isset($_SESSION['user_id'])) 
-{
-	header("Location:./Views/page_admin.php?view=dashboard");
-}else
+// si el usuario no esta logueado redirigir al login 
+if (!isset($_SESSION['user_id'])) 
 {
 	header("Location:./Views/login.php");
 }

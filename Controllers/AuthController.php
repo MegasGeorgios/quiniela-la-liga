@@ -29,12 +29,11 @@ class AuthController extends BaseController
 		 	$_SESSION['user_rol'] = $user['userData']['rol'];
 		 	$_SESSION['status'] = 'logged';
 
-		 	// TODO: cambiar redireccion para usuarios no administradores 
 		 	if ($user['userData']['rol'] == 'Administrador') 
 		 	{
 		 		header('Location:../Views/page_admin.php?view=dashboard');
 		 	}else{
-		 		header('Location:../Views/home.php?view=all_players-goals');
+		 		header('Location:../Views/home.php');
 		 	}
 
 		}else{
