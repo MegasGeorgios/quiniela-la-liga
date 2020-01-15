@@ -75,9 +75,11 @@ class User extends ConnectDB
     {        
         $this->conn->query("INSERT INTO qn_user (name, lastName, dni, phone, email, pass, created, rol_id) VALUES ('$name', '$lastName', '$dni', '$phone', '$email', '$pass', '$created', $rol_id)");
 
-        $userID = $this->conn->insert_id;
+        $result = $this->conn->query("SELECT * FROM qn_user WHERE email='$email'") or die($this->conn->error);
         
-        return $userID;        
+        $user = $result->fetch_assoc();
+        
+        return $user['id'];        
     }
 
     // Borrar usuario por id

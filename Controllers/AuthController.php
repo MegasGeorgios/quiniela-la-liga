@@ -51,7 +51,8 @@ class AuthController extends BaseController
 
 	// Registrar usuario
 	public function registreUser()
-	{
+	{	
+		session_start();
 		unset($_SESSION['status']);
 
 		if (isset($_POST) && !empty($_POST['pass']) && ($_POST['pass'] == $_POST['confirmPass'])) 
@@ -67,11 +68,11 @@ class AuthController extends BaseController
 			$rol_id = 2; // rol por defecto (no admin)
 			
 			$userModel = new User();
-			session_start();
+			
 
 			// validamos si ya existe un usuario registrado con el DNI o EMAIL en bd
-			/*if ( $userModel->validateDniAndEmail($dni, $email) == true ) 
-			{*/
+			if ( $userModel->validateDniAndEmail($dni, $email) == true ) 
+			{
 				$userID = $userModel->storeUser($name, $lastName, $dni, $phone, $email, $pass, $created, $rol_id);
 
 			 	$_SESSION['user_id'] = $userID;
@@ -81,9 +82,9 @@ class AuthController extends BaseController
 
 				header('Location:../Views/home.php');
 
-			/*}else{
+			}else{
 				$_SESSION['status'] = 'failedExist';
-			}*/
+			}
 
 		}elseif($_POST['pass'] != $_POST['confirmPass'])
 		{	

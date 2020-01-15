@@ -15,7 +15,7 @@
             <th>#</th>
             <th>Fecha</th>
             <th>Aciertos</th>
-            <th>ESTADO</th>
+            <th>Estado</th>
             <th>Premio</th>
           </tr>
         </thead>

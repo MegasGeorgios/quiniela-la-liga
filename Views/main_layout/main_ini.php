@@ -2,7 +2,7 @@
 session_start(); 
 
 // Si no ha iniciado sesion redirigir al login
-
+// si no es admin redirigir a home
 if ($_SESSION['status'] == 'failed') 
 {
   header('Location:login.php?logged=failed');
@@ -11,9 +11,17 @@ if ($_SESSION['status'] == 'failed')
 {
   header('Location:register.php?registered=failedPass');
 
+}elseif($_SESSION['status'] == 'failedExist')
+{
+  header('Location:register.php?registered=failedExist');
+
 }elseif (!isset($_SESSION['user_id']) || $_SESSION['user_id'] == 0)
 {
   header('Location:login.php');
+
+}elseif ($_SESSION['user_rol'] != 'Administrador') 
+{
+  header('Location:home.php');
 }
 
 
