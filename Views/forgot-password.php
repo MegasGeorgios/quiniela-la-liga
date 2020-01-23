@@ -1,3 +1,22 @@
+<?php 
+
+if (isset($_POST['token'])) 
+{
+  include_once('../Controllers/AuthController.php');
+
+  $resp = AuthController::saveNewPass($_POST['token'], md5($_POST['pass']));
+
+  if ($resp['error']) 
+  {
+    BaseController::msgDanger($resp['msg']);
+  }else{
+    header('Location:login.php?logged=passReset');
+  }
+  
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +27,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <link rel="shortcut icon" href="img/favicon.ico">
 
-  <title>SB Admin - Forgot Password</title>
+  <title>Recuperar contraseña</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,24 +43,40 @@
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Reset Password</div>
+      <div class="card-header">Restablecer la contraseña</div>
       <div class="card-body">
-        <div class="text-center mb-4">
-          <h4>Forgot your password?</h4>
-          <p>Enter your email address and we will send you instructions on how to reset your password.</p>
-        </div>
-        <form>
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
-              <label for="inputEmail">Enter email address</label>
-            </div>
+        <?php if (isset($_GET['token'])) { ?>
+          <div class="text-center mb-4">
+            <h4>Ingrese su nueva contraseña</h4>
           </div>
-          <a class="btn btn-primary btn-block" href="login.html">Reset Password</a>
-        </form>
+          <form action="forgot-password.php?token=<?= $_GET['token']; ?>" method="POST">
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="password" name="pass" id="inputpass" class="form-control" placeholder="Contraseña" required="required" autofocus="autofocus">
+                <label for="inputpass">Contraseña</label>
+              </div>
+            </div>
+            <input type="hidden" name="token" value="<?= $_GET['token']; ?>">
+            <input type="submit" class="btn btn-primary btn-block" value="Restablecer contraseña">
+          </form>
+        <?php }else{ ?>
+          <div class="text-center mb-4">
+            <h4>Olvidaste tu contraseña?</h4>
+            <p>Ingrese su dirección de correo electrónico y le enviaremos instrucciones sobre cómo restablecer su contraseña.</p>
+          </div>
+          <form action="page_admin.php?view=reset_pass" method="POST">
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="required" autofocus="autofocus">
+                <label for="inputEmail">Email</label>
+              </div>
+            </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Restablecer contraseña">
+          </form>
+        <?php } ?>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="login.html">Login Page</a>
+          <a class="d-block small mt-3" href="register.php">Registrarse</a>
+          <a class="d-block small" href="login.php">Iniciar sesión</a>
         </div>
       </div>
     </div>

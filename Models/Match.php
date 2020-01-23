@@ -86,8 +86,6 @@ class Match extends ConnectDB
     public function storeResult($score_home, $score_visit, $match_id)
     {        
         $this->conn->query("INSERT INTO qn_result (score_home, score_visit, match_id) VALUES ($score_home, $score_visit, $match_id)");
-
-        //$this->conn->query("INSERT INTO qn_result (score_home, score_visit, match_id) VALUES ($score_home, $score_visit, $match_id)");
        
         if (!$this->conn->error) 
         {

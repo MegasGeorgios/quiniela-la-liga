@@ -134,7 +134,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 	}
 
 // Rutas login, registro y recuperacion de contraseña. 
-}elseif (isset($_GET['view']) && ($_GET['view'] == 'login_user' || $_GET['view'] == 'registre_user' || $_GET['view'] == 'logout'))
+}elseif (isset($_GET['view']) && ($_GET['view'] == 'login_user' || $_GET['view'] == 'registre_user' || $_GET['view'] == 'logout' || $_GET['view'] == 'reset_pass'))
 {
 	$title = '';
 	$include = '../Controllers/AuthController.php';
@@ -157,6 +157,8 @@ if (isset($_GET['view']) && $_GET['view'] == 'dashboard')
 		include_once($include);
 		$controller = new $controller;
 		call_user_func( array( $controller, $method ) );
+	}elseif ($_GET['view'] == 'reset_pass') {
+		$method = 'resetPass';
 	}
 
 // Rutas resultados y partidos

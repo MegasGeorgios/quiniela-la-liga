@@ -48,6 +48,8 @@
               <input type="submit" class="btn btn-primary" value="Añadir">
             </div>
           </form>
+        <?php }elseif(!isset($matches)){ ?>
+          <p>No hay partidos disponibles</p>
         <?php } ?>
 
         <?php if (isset($poolResults)) { ?>

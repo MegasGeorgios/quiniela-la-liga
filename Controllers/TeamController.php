@@ -45,7 +45,7 @@ class TeamController extends BaseController
 
 			$teamModel = new Team();
 			$teamID = $teamModel->storeTeam($name, $slug);
-			header('Location:../Views/page_admin.php?view=edit_team&team_id='.$teamID);
+			header('Location:../Views/page_admin.php?view=all_teams');
 
 		}else{
 			BaseController::msgDanger('Ha ocurrido un error al intentar añadir el equipo!');

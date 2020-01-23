@@ -1,5 +1,6 @@
 <?php session_start(); 
 
+// Si no ha iniciado sesion redirigir al login
 if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] == 0)
 {
   header('Location:login.php');
@@ -17,6 +18,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] == 0)
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <link rel="shortcut icon" href="img/favicon.ico">
 
   <title>Quiniela la liga</title>
 
@@ -28,18 +30,18 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] == 0)
 
   <style type="text/css">
     body {
-   background-image: url("img/estadio-futbol.jpg");
-   background-repeat: no-repeat;
-   background-size:100% 100%;
-  }
+     background-image: url("img/estadio-futbol.jpg");
+     background-repeat: no-repeat;
+     background-size:100% 100%;
+    }
 
-  .top-front{
-    padding-top: 15px;
-  }
+    .top-front{
+      padding-top: 15px;
+    }
 
-  .left-nav{
-    padding-left: 10px;
-  }
+    .left-nav{
+      padding-left: 10px;
+    }
   </style>
 </head>
 

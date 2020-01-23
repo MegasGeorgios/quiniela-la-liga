@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS qn_user (
     phone VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     pass VARCHAR(100) NOT NULL,
+    token VARCHAR(100) NULL,
     created DATETIME NOT NULL,
     rol_id INT NOT NULL,
     FOREIGN KEY (rol_id) REFERENCES qn_rol (id) ON DELETE CASCADE

@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <link rel="shortcut icon" href="img/favicon.ico">
 
   <title>Iniciar sesión</title>
 
@@ -24,9 +25,13 @@
   <div class="container">
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Iniciar sesión</div>
-      <?php if (isset($_GET['logged']) && $_GET['logged'] == 'failed'): ?>
-        <?php echo '<div class="alert alert-danger" role="alert">'.'Email o contraseña invalido!'.'</div>';  ?>
-      <?php endif ?>
+      <?php if (isset($_GET['logged']) && $_GET['logged'] == 'failed'){ ?>
+        <?php echo '<div class="alert alert-danger" role="alert">'.'Email o contraseña inválido!'.'</div>';  ?>
+      <?php }elseif(isset($_GET['logged']) && $_GET['logged'] == 'passReset'){ ?>
+        <?php echo '<div class="alert alert-success" role="alert">'.'Contraseña restablecida!'.'</div>';  ?>
+      <?php }elseif(isset($_GET['logged']) && $_GET['logged'] == 'emailSent'){ ?>
+        <?php echo '<div class="alert alert-success" role="alert">'.'Email de recuperación de contraseña enviado!'.'</div>';  ?>
+      <?php } ?>
       <div class="card-body">
         <form action="page_admin.php?view=login_user" method="POST">
           <div class="form-group">
@@ -39,14 +44,6 @@
             <div class="form-label-group">
               <input type="password" id="pass" name="pass" class="form-control" placeholder="Contraseña" required="required">
               <label for="pass">Contraseña</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="remember-me">
-                Recordar contraseña
-              </label>
             </div>
           </div>
           <input type="submit" class="btn btn-primary btn-block" value="Iniciar sesión">

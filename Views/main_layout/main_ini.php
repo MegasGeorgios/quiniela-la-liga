@@ -1,24 +1,32 @@
 <?php 
 session_start(); 
 
-// Si no ha iniciado sesion redirigir al login
-// si no es admin redirigir a home
+// error credenciales al iniciar sesion
 if ($_SESSION['status'] == 'failed') 
 {
   header('Location:login.php?logged=failed');
 
+// las contraseñas no coinciden
 }elseif($_SESSION['status'] == 'failedPass')
 {
   header('Location:register.php?registered=failedPass');
 
+// ya existe un usuario registrado en bd con ese DNI o EMAIL
 }elseif($_SESSION['status'] == 'failedExist')
 {
   header('Location:register.php?registered=failedExist');
 
+// El email de recuperacion de contraseña ha sido enviado
+}elseif($_SESSION['status'] == 'emailSent')
+{
+  header('Location:login.php?logged=emailSent');
+
+// Si no ha iniciado sesion redirigir al login
 }elseif (!isset($_SESSION['user_id']) || $_SESSION['user_id'] == 0)
 {
   header('Location:login.php');
 
+// si no es admin redirigir a home
 }elseif ($_SESSION['user_rol'] != 'Administrador') 
 {
   header('Location:home.php');
@@ -37,6 +45,7 @@ if ($_SESSION['status'] == 'failed')
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <link rel="shortcut icon" href="img/favicon.ico">
 
   <title><?php echo $title; ?></title>
 

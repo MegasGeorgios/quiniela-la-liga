@@ -13,6 +13,7 @@ class User extends ConnectDB
         parent::__construct();
     }
 
+    // validar si el dni o email existe ya en bd
     public function validateDniAndEmail($dni, $email)
     {
         $register = true;
@@ -70,6 +71,16 @@ class User extends ConnectDB
         return $row;
     }
 
+    // Obtener usuario por email
+    public function getUserByEmail($email)
+    {        
+        $result = $this->conn->query("SELECT * FROM qn_user INNER JOIN qn_rol ON qn_user.rol_id=qn_rol.id WHERE qn_user.email='$email'") or die($this->conn->error);
+        
+        $row = $result->fetch_assoc();
+        
+        return $row;
+    }
+
     // Almacenar un usuario en bd e inicializar puntuacion a 0
     public function storeUser($name, $lastName, $dni, $phone, $email, $pass, $created, $rol_id)
     {        
@@ -112,6 +123,48 @@ class User extends ConnectDB
             return ["error" => false, "msg" => "Usuario actualizado!"];   
         }else{
             return ["error" => true, "msg" => "Ha ocurrido un error!"];
+        }
+    }
+
+    // guardar token para resetear contraseña
+    public function saveToken($token, $email)
+    {
+        
+        $this->conn->query("UPDATE qn_user SET token='$token' WHERE email='$email'"); 
+    }
+
+    // Validar que existe un usuario con un token especifico 
+    public function validateToken($token)
+    {
+        $result = $this->conn->query("SELECT * FROM qn_user WHERE token='$token'");
+        
+        if ($result->num_rows == 1) 
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    // almacenar la nueva contraseña
+    public function saveNewPass($token, $pass)
+    {   
+        $resp = $this->validateToken($token);
+
+        // si existe el usuario con el token en bd
+        if ($resp) 
+        {
+            $this->conn->query("UPDATE qn_user SET pass='$pass' WHERE token='$token'");
+
+            if (!$this->conn->error) 
+            {
+                return ["error" => false, "msg" => "Contraseña actualizada!"];   
+            }else{
+                return ["error" => true, "msg" => "Ha ocurrido un error!"];
+            }
+
+        }else{
+            return ["error" => true, "msg" => "No se ha podido restablecer la contraseña!"];
         }
     }
 }

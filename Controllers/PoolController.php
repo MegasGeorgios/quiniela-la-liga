@@ -28,17 +28,20 @@ class PoolController extends BaseController
 		$matchModel = new Match();
 		$fixture = $matchModel->getFixtureByDate(date('Y-m-d'))['fixture'];
 
-		$matches = $matchModel->getMatchesByFixture($fixture);
-
-		// comprobar que no se jugo ningun partido en esa jornada
-		// si ya se ha jugado al menos 1 partido obtenemos los partidos de la siguente jornada
-		foreach ($matches as $match) 
+		if (!empty($fixture)) 
 		{
-			if ($match['match_date'] < date('Y-m-d H:i:s')) 
+			$matches = $matchModel->getMatchesByFixture($fixture);
+
+			// comprobar que no se jugo ningun partido en esa jornada
+			// si ya se ha jugado al menos 1 partido obtenemos los partidos de la siguente jornada
+			foreach ($matches as $match) 
 			{
-				$fixture++;
-				$matches = $matchModel->getMatchesByFixture($fixture);
-				break;
+				if ($match['match_date'] < date('Y-m-d H:i:s')) 
+				{
+					$fixture++;
+					$matches = $matchModel->getMatchesByFixture($fixture);
+					break;
+				}
 			}
 		}
 		

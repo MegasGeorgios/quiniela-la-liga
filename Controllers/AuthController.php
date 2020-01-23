@@ -94,6 +94,54 @@ class AuthController extends BaseController
 		}
 	}
 
+	// crear token para recuperar contraseña y enviar email con el link de recuperacion
+	public function resetPass()
+	{
+		if (isset($_POST['email'])) 
+		{
+			$token = md5(uniqid(rand(), true));
+			$email = $_POST['email'];
+
+			$userModel = new User();
+			$userModel->saveToken($token, $email);
+			$url = 'http://www.quiniela-laliga.com/Views/forgot-password.php?token='.$token;
+
+			$to = $email;
+			$from = "admin@quiniela-laliga.com";
+			$subject = 'Recuperar contraseña';
+			// To send HTML mail, the Content-type header must be set
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
+			 
+			// Create email headers
+			$headers .= 'From: '.$from."\r\n".
+			    'Reply-To: '.$from."\r\n" .
+			    'X-Mailer: PHP/' . phpversion();
+			//$headers = 'From: admin@quiniela-laliga.com';
+
+			$message = '<html><body>';
+			$message .= '<b>Link para recuperar contraseña</b><br>';
+			$message .= '<a href='.$url.' target="_blank">Click aquí</a>';
+			$message .= '</body></html>';
+			
+			$retval = mail($to,$subject,$message,$headers);
+
+			session_start();
+			$_SESSION['status'] = 'emailSent';
+		}
+
+	}
+
+	// almacenar nueva contraseña en bd
+	public static function saveNewPass($token, $pass)
+	{
+		$userModel = new User();
+
+		$response = $userModel->saveNewPass($token, $pass);
+
+		return $response;
+	}
+
 }
 
 
