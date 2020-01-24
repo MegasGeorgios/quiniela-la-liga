@@ -140,7 +140,7 @@ class TeamController extends BaseController
 					$diffGoals = $diffGoals+($result['score_home']-$result['score_visit']);
 				
 				// Derrota como visitante
-				}elseif ($team['id'] == $result['id_team_visit'] && $result['score_visit'] > $result['score_home']) 
+				}elseif ($team['id'] == $result['id_team_visit'] && $result['score_visit'] < $result['score_home']) 
 				{
 					$losesVisit = $losesVisit+1;
 					$goalsF = $goalsF+$result['score_visit']; 

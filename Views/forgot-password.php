@@ -62,7 +62,7 @@ if (isset($_POST['token']))
         <?php }else{ ?>
           <div class="text-center mb-4">
             <h4>Olvidaste tu contraseña?</h4>
-            <p>Ingrese su dirección de correo electrónico y le enviaremos instrucciones sobre cómo restablecer su contraseña.</p>
+            <p>Ingrese su dirección de correo electrónico y le enviaremos instrucciones sobre cómo restablecer su contraseña. En caso de no recibir el email, revise su carpeta de spam</p>
           </div>
           <form action="page_admin.php?view=reset_pass" method="POST">
             <div class="form-group">
