@@ -18,6 +18,14 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 
+  <style type="text/css">
+    body {
+     background-image: url("img/estadio-futbol.jpg");
+     background-repeat: no-repeat;
+     background-size:100% 100%;
+    }
+  </style>
+
 </head>
 
 <body class="bg-dark">

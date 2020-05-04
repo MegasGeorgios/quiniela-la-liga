@@ -37,6 +37,14 @@ if (isset($_POST['token']))
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 
+  <style type="text/css">
+    body {
+     background-image: url("img/estadio-futbol.jpg");
+     background-repeat: no-repeat;
+     background-size:100% 100%;
+    }
+  </style>
+
 </head>
 
 <body class="bg-dark">
@@ -62,7 +70,7 @@ if (isset($_POST['token']))
         <?php }else{ ?>
           <div class="text-center mb-4">
             <h4>Olvidaste tu contraseña?</h4>
-            <p>Ingrese su dirección de correo electrónico y le enviaremos instrucciones sobre cómo restablecer su contraseña. En caso de no recibir el email, revise su carpeta de spam</p>
+            <p>Ingrese su dirección de correo electrónico y le enviaremos instrucciones sobre cómo restablecer su contraseña.En caso de no recibir el email, rivise su bandeja de spam.</p>
           </div>
           <form action="page_admin.php?view=reset_pass" method="POST">
             <div class="form-group">
